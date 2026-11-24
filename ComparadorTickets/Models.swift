@@ -1,4 +1,4 @@
-﻿import Foundation
+import Foundation
 import SwiftData
 
 enum ProductCategory: String, CaseIterable, Codable {
@@ -27,7 +27,7 @@ final class Product {
     }
 
     var cheapestRecord: PriceRecord? {
-        records.min(by: { .unitPrice < .unitPrice })
+        records.min(by: { $0.unitPrice < $1.unitPrice })
     }
 }
 
