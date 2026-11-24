@@ -128,6 +128,7 @@ struct ContentView: View {
             .searchable(text: $searchText, prompt: "Buscar producto")
             .onChange(of: selectedPhoto) { _, newItem in
                 guard let item = newItem else { return }
+                selectedPhoto = nil
                 Task {
                     do {
                         guard let data = try await item.loadTransferable(type: Data.self), !data.isEmpty else {
