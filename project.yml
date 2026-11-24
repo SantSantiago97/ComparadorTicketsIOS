@@ -1,0 +1,25 @@
+name: ComparadorTickets
+options:
+  bundleIdPrefix: com.personal
+  deploymentTarget:
+    iOS: "17.0"
+targets:
+  ComparadorTickets:
+    type: application
+    platform: iOS
+    sources:
+      - path: ComparadorTickets
+    info:
+      path: ComparadorTickets/Info.plist
+      properties:
+        CFBundleDisplayName: Comparador Tickets
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.personal.comparadortickets
+        SWIFT_VERSION: "5.9"
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO

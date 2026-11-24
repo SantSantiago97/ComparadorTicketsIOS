@@ -1,0 +1,11 @@
+{
+  "latestAppVersion": "1.0.0",
+  "releaseNotes": "Version inicial con lectura de fotos y PDF, precio por kg/L y categorias.",
+  "downloadIPAURL": "",
+  "extraCategories": [
+    "Congelados",
+    "Conservas",
+    "Panaderia"
+  ],
+  "systemPromptAdditions": "Si el ticket muestra precio por kilo o litro junto al importe total, calcula la cantidad neta con precision."
+}
