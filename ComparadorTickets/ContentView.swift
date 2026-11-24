@@ -129,18 +129,30 @@ struct ContentView: View {
             .onChange(of: selectedPhoto) { _, newItem in
                 guard let item = newItem else { return }
                 Task {
-                    if let data = try? await item.loadTransferable(type: Data.self) {
+                    do {
+                        guard let data = try await item.loadTransferable(type: Data.self), !data.isEmpty else {
+                            statusBanner = "No se pudieron leer los datos de la foto seleccionada."
+                            return
+                        }
                         await processReceipt(data: data, mimeType: "image/jpeg")
+                    } catch {
+                        statusBanner = error.localizedDescription
                     }
                 }
             }
             .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.pdf]) { result in
-                if case .success(let url) = result {
+                switch result {
+                case .success(let url):
                     let accessing = url.startAccessingSecurityScopedResource()
                     defer { if accessing { url.stopAccessingSecurityScopedResource() } }
-                    if let data = try? Data(contentsOf: url) {
+                    do {
+                        let data = try Data(contentsOf: url)
                         Task { await processReceipt(data: data, mimeType: "application/pdf") }
+                    } catch {
+                        statusBanner = error.localizedDescription
                     }
+                case .failure(let error):
+                    statusBanner = error.localizedDescription
                 }
             }
         }
